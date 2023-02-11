@@ -1,0 +1,84 @@
+plugins {
+    id 'java-library'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group 'com.sardeni'
+version '1.0-SNAPSHOT'
+
+
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testImplementation(
+            'com.codeborne:selenide:6.11.0',
+            'org.junit.jupiter:junit-jupiter-api:5.9.1',
+            'com.github.javafaker:javafaker:1.0.2',
+            'io.qameta.allure:allure-selenide:2.20.1',
+            'io.github.bonigarcia:webdrivermanager:5.3.2',
+            'org.seleniumhq.selenium:selenium-devtools-v109:4.8.0',
+            'org.assertj:assertj-core:3.24.2',
+            'org.aeonbits.owner:owner:1.0.12',
+            'io.rest-assured:rest-assured:5.3.0',
+            'io.rest-assured:json-path:5.3.0',
+            'io.rest-assured:xml-path:5.3.0',
+            'io.rest-assured:json-schema-validator:5.3.0'
+    )
+
+    allure {
+        version.set("2.20.1")
+        adapter {
+            allureJavaVersion.set("2.20.1")
+            aspectjVersion.set("1.9.5")
+            aspectjWeaver.set(true)
+
+            frameworks {
+                junit5 {
+                    // Defaults to allureJavaVersion
+                    adapterVersion.set("2.20.1")
+                    enabled.set(true)
+                }
+            }
+        }
+    }
+
+    testRuntimeOnly(
+            'org.slf4j:slf4j-simple:2.0.5',
+            'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+    )
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task smoke_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+    }
+    systemProperties(System.getProperties())
+}
+
+task regress_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags("regress")
+    }
+    systemProperties(System.getProperties())
+}
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
