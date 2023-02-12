@@ -1,8 +1,7 @@
 package com.sardeni;
 
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import static io.restassured.RestAssured.*;
@@ -66,7 +65,7 @@ public class ReqresInTests {
                 .statusCode(204);
     }
     @Test
-    @DisplayName("Updading user information data")
+    @DisplayName("Checking date and data in response after update")
     void updatingUserInformationTest() {
         String updateData = "{\"name\": \"Neo\", \"job\": \"the chosen one\"}";
         String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -82,6 +81,6 @@ public class ReqresInTests {
                 .statusCode(200)
                 .body("name", is("Neo"))
                 .body("job", is("the chosen one"))
-                .body ("updatedAt", contains(dateTime));
+                .body ("updatedAt", containsString(dateTime));
     }
 }
