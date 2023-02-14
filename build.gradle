@@ -1,41 +1,48 @@
 plugins {
-    id 'java-library'
-    id 'io.qameta.allure' version '2.11.2'
+    id "java-library"
+    id "io.qameta.allure" version "2.11.2"
+    id "io.freefair.lombok" version "6.5.1"
 }
 
-group 'com.sardeni'
-version '1.0-SNAPSHOT'
+group "com.sardeni"
+version "1.0-SNAPSHOT"
 
 
 
 repositories {
     mavenCentral()
 }
+
+def allureVersion = "2.21.0",
+    assertJVersion = "3.24.2",
+    restAssuredVersion = "5.3.0"
+
 dependencies {
     testImplementation(
-            'com.codeborne:selenide:6.11.0',
-            'io.rest-assured:rest-assured:5.3.0',
-            'io.rest-assured:json-schema-validator:5.3.0',
-            'org.junit.jupiter:junit-jupiter-api:5.9.1',
-            'com.github.javafaker:javafaker:1.0.2',
-            'io.qameta.allure:allure-selenide:2.20.1',
-            'io.github.bonigarcia:webdrivermanager:5.3.2',
-            'org.seleniumhq.selenium:selenium-devtools-v109:4.8.0',
-            'org.assertj:assertj-core:3.24.2',
-            'org.aeonbits.owner:owner:1.0.12'
+            "com.codeborne:selenide:6.11.0",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.junit.jupiter:junit-jupiter-api:5.9.1",
+            "com.github.javafaker:javafaker:1.0.2",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.github.bonigarcia:webdrivermanager:5.3.2",
+            "org.seleniumhq.selenium:selenium-devtools-v109:4.8.0",
+            "org.assertj:assertj-core:$assertJVersion",
+            "org.aeonbits.owner:owner:1.0.12"
     )
 
     allure {
-        version.set("2.20.1")
+        version.set("2.21.0")
         adapter {
-            allureJavaVersion.set("2.20.1")
+            allureJavaVersion.set(allureVersion)
             aspectjVersion.set("1.9.5")
             aspectjWeaver.set(true)
 
             frameworks {
                 junit5 {
                     // Defaults to allureJavaVersion
-                    adapterVersion.set("2.20.1")
+                    adapterVersion.set(allureVersion)
                     enabled.set(true)
                 }
             }
@@ -43,13 +50,13 @@ dependencies {
     }
 
     testRuntimeOnly(
-            'org.slf4j:slf4j-simple:2.0.5',
-            'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+            "org.slf4j:slf4j-simple:2.0.5",
+            "org.junit.jupiter:junit-jupiter-engine:5.9.1"
     )
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding = "UTF-8"
 }
 
 tasks.withType(Test) {
