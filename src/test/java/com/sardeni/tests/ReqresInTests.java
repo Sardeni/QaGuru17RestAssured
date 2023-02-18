@@ -70,6 +70,18 @@ public class ReqresInTests extends TestBase {
     }
 
     @Test
+    @DisplayName("checking avatar through the groovy")
+    public void checkAvatarGroovy() {
+        given(RequestSpec)
+                .when()
+                .get("/users/")
+                .then().log().all()
+                .spec(ResponseSpec)
+                .body("data.findAll{it.avatar.startsWith('https://reqres.in')}.avatar.flatten()",
+                        hasItem("https://reqres.in/img/faces/3-image.jpg"));
+    }
+
+    @Test
     @DisplayName("Checking date and data in response after update")
     void updatingUserInformationTest() {
         String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
