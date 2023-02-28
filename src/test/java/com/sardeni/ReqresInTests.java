@@ -2,8 +2,10 @@ package com.sardeni;
 
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -23,6 +25,7 @@ public class ReqresInTests {
                 .body("data.email", is("janet.weaver@reqres.in"));
 
     }
+
     @Test
     @DisplayName("Resource not found")
     void resourceNotFoundTest() {
@@ -35,6 +38,7 @@ public class ReqresInTests {
                 .log().all()
                 .statusCode(404);
     }
+
     @Test
     @DisplayName("Successful login and getting token")
     void successfulLoginAndGetTokenTest() {
@@ -52,6 +56,7 @@ public class ReqresInTests {
                 .statusCode(200)
                 .body("token", not(empty()));
     }
+
     @Test
     @DisplayName("Deleting user")
     void deletingUser() {
@@ -64,6 +69,7 @@ public class ReqresInTests {
                 .log().status()
                 .statusCode(204);
     }
+
     @Test
     @DisplayName("Checking date and data in response after update")
     void updatingUserInformationTest() {
@@ -81,6 +87,6 @@ public class ReqresInTests {
                 .statusCode(200)
                 .body("name", is("Neo"))
                 .body("job", is("the chosen one"))
-                .body ("updatedAt", containsString(dateTime));
+                .body("updatedAt", containsString(dateTime));
     }
 }
