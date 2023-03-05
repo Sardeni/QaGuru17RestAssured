@@ -13,7 +13,7 @@ import static com.sardeni.specs.ProjectSpecs.ResponseSpec;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class ReqresInTests extends TestBase {
+public class ReqresInTests {
     @Test
     @DisplayName("Checking user email")
     void userEmailTest() {
@@ -28,7 +28,7 @@ public class ReqresInTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Resource not found")
+    @DisplayName("Resource not found, HTTP 404")
     void resourceNotFoundTest() {
 
         given(RequestSpec)
@@ -57,7 +57,7 @@ public class ReqresInTests extends TestBase {
     }
 
     @Test
-    @DisplayName("Deleting user")
+    @DisplayName("Deleting user, expecting HTTP 204")
     void deletingUser() {
 
         given(RequestSpec)
@@ -101,7 +101,6 @@ public class ReqresInTests extends TestBase {
                 .body("name", is("Neo"))
                 .body("job", is("the chosen one"))
                 .body("updatedAt", containsString(dateTime));
-        // Спросить на занятии у Стаса
         //   .body("updatedAt", containsString(date.toString()));
     }
 }

@@ -19,7 +19,6 @@ def allureVersion = "2.21.0",
 
 dependencies {
     testImplementation(
-            "com.codeborne:selenide:6.11.0",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
@@ -28,8 +27,7 @@ dependencies {
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.github.bonigarcia:webdrivermanager:5.3.2",
             "org.seleniumhq.selenium:selenium-devtools-v109:4.8.0",
-            "org.assertj:assertj-core:$assertJVersion",
-            "org.aeonbits.owner:owner:1.0.12"
+            "org.assertj:assertj-core:$assertJVersion"
     )
 
     allure {

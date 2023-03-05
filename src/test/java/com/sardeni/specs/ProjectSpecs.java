@@ -14,6 +14,8 @@ public class ProjectSpecs {
     public static RequestSpecification RequestSpec = with()
             .log().all()
             .filter(withCustomTemplates())
+            .baseUri("https://reqres.in")
+            .basePath("/api")
             .contentType(JSON);
 
 
