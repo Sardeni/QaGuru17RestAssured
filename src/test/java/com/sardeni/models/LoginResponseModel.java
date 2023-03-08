@@ -2,6 +2,7 @@ package com.sardeni.models;
 
 import lombok.Data;
 
-public @Data class LoginResponseModel {
+@Data
+public class LoginResponseModel {
     private String token;
 }

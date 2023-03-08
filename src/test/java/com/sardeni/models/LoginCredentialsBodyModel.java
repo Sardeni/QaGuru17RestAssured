@@ -2,7 +2,8 @@ package com.sardeni.models;
 
 import lombok.Data;
 
-public @Data class LoginCredentialsBodyModel {
+@Data
+public class LoginCredentialsBodyModel {
 
     private String email, password;
 }

@@ -1,7 +1,9 @@
 package com.sardeni.models;
 
 import lombok.Data;
-public @Data class UpdateUserInfoResponseTimeModel {
+
+@Data
+public class UpdateUserInfoResponseTimeModel {
 
     private String updatedAt;
 }
